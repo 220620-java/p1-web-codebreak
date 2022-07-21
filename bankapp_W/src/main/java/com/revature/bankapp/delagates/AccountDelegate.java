@@ -71,14 +71,12 @@ public class AccountDelegate implements FrontControllerDelagate{
 				account = objMapper.readValue(req.getInputStream(), Account.class);
 
 				if (account==null) throw new RuntimeException();
-				try {
+				
 					account = accountServ.createAccount(account);
 					
 					AccountDTO accountResp = new AccountDTO(account);
 					resp.getWriter().write(objMapper.writeValueAsString(accountResp));
-					} catch () {
-						resp.sendError(409, "A user with that username already exists.");
-					}
+					
 			} catch (MismatchedInputException | RuntimeException e) {
 				resp.sendError(400, "The request body was empty.");
 			}
