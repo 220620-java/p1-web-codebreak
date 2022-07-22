@@ -47,7 +47,29 @@ public class UserPostgres implements UserDAO {
 
 	@Override
 	public User findById(int id) {
-		// TODO Auto-generated method stub
+		User user = null;
+		try (Connection conn = connUtil.getConnection()) {
+			conn.setAutoCommit(false);
+			String sql = "select * from users where user_id = ?";
+			
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setInt(1, id);
+			
+			ResultSet result = st.executeQuery();
+			
+			if(result.next()) {
+				 user = new User();
+				 user.setId(result.getInt("user_id"));
+				 user.setFirstname(result.getString("firstname"));
+				 user.setLastname(result.getString("lastname"));
+				 user.setUsername(result.getString("username"));
+				 user.setPassword(result.getString("passwd"));
+			}
+			//conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
 		return null;
 	}
 
