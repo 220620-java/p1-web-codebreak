@@ -3,13 +3,11 @@
   <display-name>bankapp_W</display-name>
   <servlet>
 		<servlet-name>Front</servlet-name>
-		<servlet-class>com.revature.bankapp.servlets.FrontControllerServlet
-		</servlet-class>
+		<servlet-class>com.revature.bankapp.servlets.FrontControllerServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>Front</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-  
 </web-app>

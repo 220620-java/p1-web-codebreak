@@ -81,8 +81,8 @@ public class UserDTO {
 		return accounts;
 	}
 
-	public void setAccounts(List<Account> accounts) {
-		this.accounts = accounts;
+	public void setAccounts(com.revature.bankapp.ds.List<Account> list) {
+		this.accounts = (List<Account>) list;
 	}
 
 	@Override

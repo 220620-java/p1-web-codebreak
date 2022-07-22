@@ -50,7 +50,8 @@ public class AccountDelegate implements FrontControllerDelagate{
 		} else {
 			try {
 				int id = Integer.valueOf(path);
-				Account account = accountServ.getAllAccounts(user);
+				User user = userServ.getUser(id);
+				com.revature.bankapp.ds.List<Account> account = accountServ.getAllAccounts(user);
 				if (account!=null) {
 					AccountDTO accountResp = new AccountDTO(account);
 					resp.getWriter().write(objMapper.writeValueAsString(accountResp));
@@ -91,6 +92,7 @@ public class AccountDelegate implements FrontControllerDelagate{
 		} else {
 			try {
 				int id = Integer.valueOf(path);
+				User user = userServ.getUser(id);
 				Account account = accountServ.accountDetail(account, user);
 				if (account!=null) {
 					account = objMapper.readValue(req.getInputStream(), Account.class);
@@ -98,7 +100,7 @@ public class AccountDelegate implements FrontControllerDelagate{
 					try {
 						if (account==null) throw new RuntimeException();
 						if (account.getId()==id) {
-							account = accountServ.deposit(account, num);
+							account = accountServ.updateBalance();
 							resp.getWriter().write(objMapper.writeValueAsString(account));
 						} else {
 							resp.sendError(409, "The ID in the URI did not match the ID in the body.");

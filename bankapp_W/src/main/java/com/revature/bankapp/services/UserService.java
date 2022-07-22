@@ -29,4 +29,9 @@ public class UserService {
 		}
 	}
 	
+	public User getUser(int id) {
+		User user = userDao.findById(id);
+		return user;
+	}
+	
 }

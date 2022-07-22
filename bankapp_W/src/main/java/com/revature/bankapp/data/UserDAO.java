@@ -5,4 +5,6 @@ import com.revature.bankapp.models.User;
 public interface UserDAO extends DataAccessObject<User> {
 
 	public User findByUsername(String username);
+	
+	public User findById(int id);
 }
